@@ -116,10 +116,10 @@ static void render_layer_status(void) {
             oled_write_P(PSTR("QWERTY"), false);
             break;
         case _RAISE:
-            oled_write_P(PSTR("NAVIGATION"), false);
+            oled_write_P(PSTR("RAISE"), false);
             break;
         case _LOWER:
-            oled_write_P(PSTR("FUNCTION"), false);
+            oled_write_P(PSTR("LOWER"), false);
             break;
         case _ADJUST:
             oled_write_P(PSTR("ADJUST"), false);
@@ -128,7 +128,17 @@ static void render_layer_status(void) {
             oled_write_P(PSTR("UNKNOWN"), false);
             break;
     }
+        oled_write_P(PSTR("\nOS: "), false);
+
+    if (keymap_config.swap_lctl_lgui) {
+        oled_write_P(PSTR("Windows"), false);
+    } else {
+        oled_write_P(PSTR("Mac"), false);
+    }
 }
+
+
+
 static void render_logo(void) {
     static const char PROGMEM qmk_logo[] = {
         0x80, 0x81, 0x82, 0x83, 0x84, 0x85, 0x86, 0x87, 0x88, 0x89, 0x8A, 0x8B, 0x8C, 0x8D, 0x8E, 0x8F, 0x90, 0x91, 0x92, 0x93, 0x94,
@@ -140,7 +150,7 @@ static void render_logo(void) {
 }
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        render_layer_status();  // Renders the current layer=
+        render_layer_status();  // Renders the current layer and OS
     } else {
         render_logo();  // Renders a static logo
     }
