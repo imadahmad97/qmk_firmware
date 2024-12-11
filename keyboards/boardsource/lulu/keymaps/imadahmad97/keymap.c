@@ -116,10 +116,10 @@ static void render_layer_status(void) {
             oled_write_P(PSTR("QWERTY"), false);
             break;
         case _RAISE:
-            oled_write_P(PSTR("RAISE"), false);
+            oled_write_P(PSTR("NAVIGATION"), false);
             break;
         case _LOWER:
-            oled_write_P(PSTR("LOWER"), false);
+            oled_write_P(PSTR("FUNCTION"), false);
             break;
         case _ADJUST:
             oled_write_P(PSTR("ADJUST"), false);
@@ -138,10 +138,9 @@ static void render_logo(void) {
 
     oled_write_P(qmk_logo, false);
 }
-
 bool oled_task_user(void) {
     if (is_keyboard_master()) {
-        render_layer_status();  // Renders the current layer
+        render_layer_status();  // Renders the current layer=
     } else {
         render_logo();  // Renders a static logo
     }
